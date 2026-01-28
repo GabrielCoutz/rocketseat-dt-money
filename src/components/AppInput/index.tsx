@@ -39,7 +39,9 @@ export const AppInput = <T extends FieldValues>({
       render={({ field: { onChange, value } }) => (
         <View className="mt-4 w-full">
           {label && (
-            <Text className={clsx('text-white', { 'text-accent-brand': isFocused })}>{label}</Text>
+            <Text className={clsx('text-gray-400', { 'text-accent-brand': isFocused })}>
+              {label}
+            </Text>
           )}
 
           <TouchableOpacity className="h-16 flex-row items-center justify-between border-b border-gray-600 px-3 py-2">

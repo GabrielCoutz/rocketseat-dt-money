@@ -1,9 +1,16 @@
-import { Text, View } from 'react-native';
+import { AuthHeader } from '@/components/AuthHeader';
+import { DismissKeyboardView } from '@/components/DismissKeyboardView';
+import { RegisterForm } from '@/screens/Register/RegisterForm';
+import { View } from 'react-native';
 
 export const RegisterScreen = () => {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-red-600">Register Sscreen</Text>
-    </View>
+    <DismissKeyboardView>
+      <View className="w-[82%] flex-1 self-center">
+        <AuthHeader />
+
+        <RegisterForm />
+      </View>
+    </DismissKeyboardView>
   );
 };
