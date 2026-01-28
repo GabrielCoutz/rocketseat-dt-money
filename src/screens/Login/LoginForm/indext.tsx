@@ -1,18 +1,28 @@
 import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { IPublicStackParamsList } from '@/routes/PublicRoutes';
+import { schema } from '@/screens/Login/LoginForm/schema';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 export interface ILoginFormParams {
   email: string;
   password: string;
 }
 
 export const LoginForm = () => {
-  const { control, handleSubmit, formState } = useForm<ILoginFormParams>();
   const { navigate } = useNavigation<NavigationProp<IPublicStackParamsList>>();
+  const { control, handleSubmit, formState } = useForm<ILoginFormParams>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async () => {};
 
   return (
     <>
@@ -34,7 +44,9 @@ export const LoginForm = () => {
       />
 
       <View className="mb-6 mt-8 min-h-[250px] flex-1 justify-between">
-        <AppButton iconName="arrow-forward">Logar</AppButton>
+        <AppButton iconName="arrow-forward" onPress={handleSubmit(onSubmit)}>
+          Logar
+        </AppButton>
 
         <View>
           <Text className="mb-6 text-base text-gray-300">Ainda não tem uma conta?</Text>

@@ -1,10 +1,12 @@
 import { AppButton } from '@/components/AppButton';
 import { AppInput } from '@/components/AppInput';
 import { IPublicStackParamsList } from '@/routes/PublicRoutes';
+import { schema } from '@/screens/Register/RegisterForm/schema';
 import { NavigationProp, useNavigation } from '@react-navigation/core';
 import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 export interface IFormRegisterProps {
   email: string;
   name: string;
@@ -13,8 +15,18 @@ export interface IFormRegisterProps {
 }
 
 export const RegisterForm = () => {
-  const { control, handleSubmit, formState } = useForm<IFormRegisterProps>();
   const { navigate } = useNavigation<NavigationProp<IPublicStackParamsList>>();
+  const { control, handleSubmit, formState } = useForm<IFormRegisterProps>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: '',
+      name: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
+
+  const onSubmit = async () => {};
 
   return (
     <>
@@ -51,7 +63,9 @@ export const RegisterForm = () => {
       />
 
       <View className="mb-6 mt-8 min-h-[250px] flex-1 justify-between">
-        <AppButton iconName="arrow-forward">Cadastrar</AppButton>
+        <AppButton iconName="arrow-forward" onPress={handleSubmit(onSubmit)}>
+          Cadastrar
+        </AppButton>
 
         <View>
           <Text className="mb-6 text-base text-gray-300">Já tem uma conta?</Text>
