@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuthContext } from '@/context/auth.context';
+
 export interface IFormRegisterProps {
   email: string;
   name: string;
@@ -15,6 +17,7 @@ export interface IFormRegisterProps {
 }
 
 export const RegisterForm = () => {
+  const { handleRegister } = useAuthContext();
   const { navigate } = useNavigation<NavigationProp<IPublicStackParamsList>>();
   const { control, handleSubmit, formState } = useForm<IFormRegisterProps>({
     resolver: yupResolver(schema),
@@ -26,7 +29,13 @@ export const RegisterForm = () => {
     },
   });
 
-  const onSubmit = async () => {};
+  const onSubmit = async (payload: IFormRegisterProps) => {
+    try {
+      await handleRegister(payload);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
