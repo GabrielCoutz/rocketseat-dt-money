@@ -10,7 +10,7 @@ export interface IAuthContext {
   token: string | null;
   handleAuthenticate: (payload: ILoginFormParams) => Promise<void>;
   handleRegister: (payload: IFormRegisterProps) => Promise<void>;
-  handleLogout: VoidFunction;
+  handleLogout: () => Promise<void>;
   restoreUserSession?: () => Promise<string | null>;
 }
 
@@ -50,9 +50,11 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
     return token;
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setUser(null);
     setToken(null);
+
+    await SecureStore.deleteItemAsync('dt-money-user');
   };
 
   return (

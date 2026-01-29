@@ -1,9 +1,14 @@
-import { Text, View } from 'react-native';
+import { useAuthContext } from '@/context/auth.context';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 export const HomeScreen = () => {
+  const { handleLogout } = useAuthContext();
+
   return (
     <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-red-600">Home Screen</Text>
+      <TouchableOpacity onPress={handleLogout}>
+        <Text>Sair</Text>
+      </TouchableOpacity>
     </View>
   );
 };

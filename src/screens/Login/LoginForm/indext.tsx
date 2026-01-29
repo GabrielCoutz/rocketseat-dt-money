@@ -8,7 +8,9 @@ import { Text, View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthContext } from '@/context/auth.context';
-import { AxiosError } from 'axios';
+
+import { useSnackbarContext } from '@/context/snackbar.context';
+import { AppError } from '@/shared/helpers/AppError';
 export interface ILoginFormParams {
   email: string;
   password: string;
@@ -16,6 +18,7 @@ export interface ILoginFormParams {
 
 export const LoginForm = () => {
   const { handleAuthenticate } = useAuthContext();
+  const { notify } = useSnackbarContext();
   const { navigate } = useNavigation<NavigationProp<IPublicStackParamsList>>();
   const { control, handleSubmit, formState } = useForm<ILoginFormParams>({
     defaultValues: {
@@ -29,9 +32,11 @@ export const LoginForm = () => {
     try {
       await handleAuthenticate(payload);
     } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error.response?.data);
-      }
+      if (error instanceof AppError)
+        notify({
+          type: 'error',
+          message: error.message || 'Ocorreu um erro ao tentar logar',
+        });
     }
   };
 

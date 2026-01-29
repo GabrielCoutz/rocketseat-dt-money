@@ -1,3 +1,4 @@
+import { AppError } from '@/shared/helpers/AppError';
 import axios from 'axios';
 import { Platform } from 'react-native';
 
@@ -9,3 +10,14 @@ const baseURL = Platform.select({
 export const dtMoneyApi = axios.create({
   baseURL,
 });
+
+dtMoneyApi.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response && error.response.data) {
+      return Promise.reject(new AppError(error.response.data.message));
+    }
+
+    return Promise.reject(new AppError('Não foi possível conectar ao servidor.'));
+  }
+);
