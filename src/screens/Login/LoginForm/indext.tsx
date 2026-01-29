@@ -4,13 +4,14 @@ import { IPublicStackParamsList } from '@/routes/PublicRoutes';
 import { schema } from '@/screens/Login/LoginForm/schema';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthContext } from '@/context/auth.context';
 
 import { useSnackbarContext } from '@/context/snackbar.context';
 import { AppError } from '@/shared/helpers/AppError';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 export interface ILoginFormParams {
   email: string;
   password: string;
@@ -18,9 +19,13 @@ export interface ILoginFormParams {
 
 export const LoginForm = () => {
   const { handleAuthenticate } = useAuthContext();
-  const { notify } = useSnackbarContext();
+  const { handleError } = useErrorHandler();
   const { navigate } = useNavigation<NavigationProp<IPublicStackParamsList>>();
-  const { control, handleSubmit, formState } = useForm<ILoginFormParams>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<ILoginFormParams>({
     defaultValues: {
       email: '',
       password: '',
@@ -32,11 +37,7 @@ export const LoginForm = () => {
     try {
       await handleAuthenticate(payload);
     } catch (error) {
-      if (error instanceof AppError)
-        notify({
-          type: 'error',
-          message: error.message || 'Ocorreu um erro ao tentar logar',
-        });
+      handleError(error, 'Falha ao fazer login. Verifique suas credenciais.');
     }
   };
 
@@ -61,7 +62,7 @@ export const LoginForm = () => {
 
       <View className="mb-6 mt-8 min-h-[250px] flex-1 justify-between">
         <AppButton iconName="arrow-forward" onPress={handleSubmit(onSubmit)}>
-          Logar
+          {isSubmitting ? <ActivityIndicator color="#fff" /> : 'Logar'}
         </AppButton>
 
         <View>
