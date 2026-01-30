@@ -1,4 +1,5 @@
 import { AppError } from '@/shared/helpers/AppError';
+import { addTokenToRequest } from '@/shared/helpers/axios.helper';
 import axios from 'axios';
 import { Platform } from 'react-native';
 
@@ -10,6 +11,8 @@ const baseURL = Platform.select({
 export const dtMoneyApi = axios.create({
   baseURL,
 });
+
+addTokenToRequest(dtMoneyApi);
 
 dtMoneyApi.interceptors.response.use(
   (response) => response,

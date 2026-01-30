@@ -1637,6 +1637,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gorhom/bottom-sheet@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@gorhom/bottom-sheet@npm:5.2.8"
+  dependencies:
+    "@gorhom/portal": "npm:1.0.14"
+    invariant: "npm:^2.2.4"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-native": "*"
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">=2.16.1"
+    react-native-reanimated: "*"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-native":
+      optional: true
+  checksum: 10c0/9bb71a375cdcaec650e8c84ab5e3e42f55b3ae19d9e08cf90688cf72706588d211f3aeef28b857a37e9e411efa8fdf038429c90a8855167c7ab3dce5c595dfca
+  languageName: node
+  linkType: hard
+
+"@gorhom/portal@npm:1.0.14":
+  version: 1.0.14
+  resolution: "@gorhom/portal@npm:1.0.14"
+  dependencies:
+    nanoid: "npm:^3.3.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/86f33afc2ac2656a86a6f3fd1e41565419839576ede2c38333434a93a0a2fe4fb6fc18ab3360579427f2a1fc3b4564b933cc5ae1793a7e2825c93860a00b215f
+  languageName: node
+  linkType: hard
+
 "@hookform/resolvers@npm:^5.2.2":
   version: 5.2.2
   resolution: "@hookform/resolvers@npm:5.2.2"
@@ -4571,6 +4605,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-checkbox@npm:~5.0.8":
+  version: 5.0.8
+  resolution: "expo-checkbox@npm:5.0.8"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native-web:
+      optional: true
+  checksum: 10c0/9407ee98bb74ab8174730936c5baf880bd82d80ed53d24ae506d253e17f0b3efe786a11f8e9a0d1da1b5242c01942c513efe151d3aaf24dd2dda7d721bcdd0f4
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:~18.0.12, expo-constants@npm:~18.0.13":
   version: 18.0.13
   resolution: "expo-constants@npm:18.0.13"
@@ -6853,6 +6901,7 @@ __metadata:
   resolution: "my-expo-app@workspace:."
   dependencies:
     "@babel/core": "npm:^7.20.0"
+    "@gorhom/bottom-sheet": "npm:^5.2.8"
     "@hookform/resolvers": "npm:^5.2.2"
     "@react-native-masked-view/masked-view": "npm:0.3.2"
     "@react-navigation/native": "npm:^7.1.28"
@@ -6865,6 +6914,7 @@ __metadata:
     eslint-config-expo: "npm:~10.0.0"
     eslint-config-prettier: "npm:^10.1.2"
     expo: "npm:^54.0.0"
+    expo-checkbox: "npm:~5.0.8"
     expo-secure-store: "npm:~15.0.8"
     expo-status-bar: "npm:~3.0.8"
     nativewind: "npm:latest"
@@ -6873,6 +6923,7 @@ __metadata:
     react: "npm:19.1.0"
     react-hook-form: "npm:^7.71.1"
     react-native: "npm:0.81.5"
+    react-native-currency-input: "npm:^1.1.1"
     react-native-gesture-handler: "npm:~2.28.0"
     react-native-reanimated: "npm:~4.1.1"
     react-native-safe-area-context: "npm:~5.6.0"
@@ -6895,7 +6946,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.11, nanoid@npm:^3.3.7":
+"nanoid@npm:^3.3.1, nanoid@npm:^3.3.11, nanoid@npm:^3.3.7":
   version: 3.3.11
   resolution: "nanoid@npm:3.3.11"
   bin:
@@ -7816,6 +7867,16 @@ __metadata:
     react-native-svg:
       optional: true
   checksum: 10c0/c3be3a785216ce430d32a78f52c76387b4fc38b53b9d66d4cf5e3973f1fe35c801f8f299e6b8c129be9c979ccd3274a35dccf4f8054f46cca3288a3ca77c7a4c
+  languageName: node
+  linkType: hard
+
+"react-native-currency-input@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "react-native-currency-input@npm:1.1.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/cff78f4a2ccdc2175be262c9d6e8cf1c751053e6130f286f89fe3e82b99d9ef4a48fdde44103d89c4917f403617f8ffcbf51589ffb873176a0f8feb80dc6e2f4
   languageName: node
   linkType: hard
 

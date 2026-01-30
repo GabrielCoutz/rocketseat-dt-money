@@ -1,14 +1,33 @@
+import { AppHeader } from '@/components/AppHeader';
 import { useAuthContext } from '@/context/auth.context';
+import { useTransactionContext } from '@/context/transaction';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const HomeScreen = () => {
   const { handleLogout } = useAuthContext();
+  const { fetchCategories } = useTransactionContext();
+  const { handleError } = useErrorHandler();
+
+  const handleFetchCategories = async () => {
+    try {
+      await fetchCategories();
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      await handleFetchCategories();
+    })();
+  }, []);
 
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <TouchableOpacity onPress={handleLogout}>
-        <Text>Sair</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView className="flex-1 bg-background-secondary">
+      <AppHeader />
+    </SafeAreaView>
   );
 };
