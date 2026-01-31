@@ -25,7 +25,7 @@ export const HomeScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-background-primary">
+    <SafeAreaView className="flex-1 bg-background-secondary">
       <FlatList
         data={transactions}
         keyExtractor={({ id }) => `transaction-${id}`}

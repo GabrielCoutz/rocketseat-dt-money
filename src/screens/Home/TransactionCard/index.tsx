@@ -8,6 +8,8 @@ import clsx from 'clsx';
 import { Transaction } from '@/shared/interfaces/https/transaction';
 import { TransactionType } from '@/shared/enums/transaction-types';
 import { RightAction } from '@/screens/Home/TransactionCard/RightAction';
+import { LeftAction } from '@/screens/Home/TransactionCard/LeftAction';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 interface Params {
   transaction: Transaction;
@@ -26,7 +28,9 @@ export const TransactionCard: FC<Params> = ({ transaction }) => {
         marginBottom: 16,
       }}
       renderRightActions={() => <RightAction transactionId={transaction.id} />}
-      overshootRight={false}>
+      renderLeftActions={() => <LeftAction transaction={transaction} />}
+      overshootRight={false}
+      overshootLeft={false}>
       <View className="h-[140] rounded-md bg-background-tertiary p-6">
         <Text className="text-base text-white">{transaction.description}</Text>
         <Text
