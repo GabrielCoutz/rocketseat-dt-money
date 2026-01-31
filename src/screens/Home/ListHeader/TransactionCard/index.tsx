@@ -5,6 +5,7 @@ import { TransactionType } from '@/shared/enums/transaction-types';
 import { useTransactionContext } from '@/context/transaction';
 import { ICONS } from '@/screens/Home/ListHeader/TransactionCard/strategies/icon-strategy';
 import { CARD_DATA } from '@/screens/Home/ListHeader/TransactionCard/strategies/cad-data-strategy';
+import clsx from 'clsx';
 
 export type TransactionCardType = TransactionType | 'total';
 
@@ -25,7 +26,10 @@ export const TransactionCard: FC<Props> = ({ type, amount }) => {
 
   return (
     <View
-      className={`bg-${cardData.bgColor} mr-6 min-w-[280] justify-between rounded-md px-8 py-6`}>
+      className={clsx(
+        `bg-${cardData.bgColor} mr-6 min-w-[280] justify-between rounded-md px-8 py-6`,
+        type === 'total' && 'mr-12'
+      )}>
       <View className="mb-1 flex-row items-center justify-between">
         <Text className="text-base text-white">{cardData.label}</Text>
         <MaterialIcons name={iconData.name} size={26} color={iconData.color} />

@@ -3,14 +3,18 @@ import * as transactionService from '@/shared/services/dt-money/transaction.serv
 import { TransactionCategory } from '@/shared/interfaces/https/transaction-category-response';
 import { CreateTransactionInterface } from '@/shared/interfaces/https/create-transaction-request';
 import { TotalTransactions, Transaction } from '@/shared/interfaces/https/transaction';
+import { UpdateTransactionInterface } from '@/shared/interfaces/https/update-transaction-request';
 
 export type TransactionContextType = {
   fetchCategories: () => Promise<void>;
   categories: TransactionCategory[];
   createTransaction: (transaction: CreateTransactionInterface) => Promise<void>;
+  updateTransaction: (transaction: UpdateTransactionInterface) => Promise<void>;
   fetchTransactions: () => Promise<void>;
   totalTransactions: TotalTransactions;
   transactions: Transaction[];
+  refreshTransactions: () => void;
+  loading: boolean;
 };
 
 export const TransactionContext = createContext({} as TransactionContextType);
@@ -18,6 +22,7 @@ export const TransactionContext = createContext({} as TransactionContextType);
 export const TransactionContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [categories, setCategories] = useState<TransactionCategory[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(false);
   const [totalTransactions, setTotalTransactions] = useState<TotalTransactions>({
     expense: 0,
     revenue: 0,
@@ -43,6 +48,21 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({ children }) 
     setTotalTransactions(transactionsResponse.totalTransactions);
   }, []);
 
+  const refreshTransactions = async () => {
+    setLoading(true);
+    const transactionsResponse = await transactionService.getTransactions({
+      page: 1,
+      perPage: 10,
+    });
+    setTransactions(transactionsResponse.data);
+    setTotalTransactions(transactionsResponse.totalTransactions);
+    setLoading(false);
+  };
+
+  const updateTransaction = async (transaction: UpdateTransactionInterface) => {
+    await transactionService.updateTransaction(transaction);
+  };
+
   return (
     <TransactionContext.Provider
       value={{
@@ -52,6 +72,9 @@ export const TransactionContextProvider: FC<PropsWithChildren> = ({ children }) 
         fetchTransactions,
         totalTransactions,
         transactions,
+        updateTransaction,
+        refreshTransactions,
+        loading,
       }}>
       {children}
     </TransactionContext.Provider>
