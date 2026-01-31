@@ -13,7 +13,8 @@ export const HomeScreen = () => {
     fetchTransactions,
     transactions,
     refreshTransactions,
-    loading,
+    handleLoadings,
+    loadings,
     loadMoreTransactions,
     pagination,
   } = useTransactionContext();
@@ -21,33 +22,70 @@ export const HomeScreen = () => {
 
   const handleFetchCategories = async () => {
     try {
+      handleLoadings({
+        key: 'initial',
+        value: true,
+      });
       await fetchCategories();
     } catch (error) {
       handleError(error);
+    } finally {
+      handleLoadings({
+        key: 'initial',
+        value: false,
+      });
     }
   };
 
   const handleFetchInitialTransactions = async () => {
     try {
+      handleLoadings({
+        key: 'initial',
+        value: true,
+      });
       await fetchTransactions({ page: 1 });
     } catch (error) {
       handleError(error, 'Falha ao buscar transações');
+    } finally {
+      handleLoadings({
+        key: 'initial',
+        value: false,
+      });
     }
   };
 
   const handleLoadMoreTransactions = async () => {
     try {
+      handleLoadings({
+        key: 'loadMore',
+        value: true,
+      });
+
       await loadMoreTransactions(pagination);
     } catch (error) {
       handleError(error, 'Falha ao carregar novas transações');
+    } finally {
+      handleLoadings({
+        key: 'loadMore',
+        value: false,
+      });
     }
   };
 
   const handleRefreshTransactions = async () => {
     try {
+      handleLoadings({
+        key: 'refresh',
+        value: true,
+      });
       await refreshTransactions();
     } catch (error) {
       handleError(error, 'Falha ao recarregar as transações');
+    } finally {
+      handleLoadings({
+        key: 'refresh',
+        value: false,
+      });
     }
   };
 
@@ -57,7 +95,7 @@ export const HomeScreen = () => {
     })();
   }, []);
 
-  if (loading && transactions.length === 0) {
+  if (loadings.initial && transactions.length === 0) {
     return <ActivityIndicator className="flex-1 bg-background-secondary" />;
   }
   return (
@@ -67,7 +105,7 @@ export const HomeScreen = () => {
         keyExtractor={({ id, createdAt }) => `transaction-${id}-${createdAt}`}
         renderItem={({ item }) => <TransactionCard transaction={item} />}
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={handleRefreshTransactions} />
+          <RefreshControl refreshing={loadings.refresh} onRefresh={handleRefreshTransactions} />
         }
         ListHeaderComponent={ListHeader}
         onEndReached={handleLoadMoreTransactions}
