@@ -1,6 +1,8 @@
 import { useTransactionContext } from '@/context/transaction';
+import { EmptyList } from '@/screens/Home/EmptyList';
 import { ListHeader } from '@/screens/Home/ListHeader';
 import { TransactionCard } from '@/screens/Home/TransactionCard';
+import { colors } from '@/shared/colors';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { useEffect } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
@@ -110,6 +112,12 @@ export const HomeScreen = () => {
         ListHeaderComponent={ListHeader}
         onEndReached={handleLoadMoreTransactions}
         onEndReachedThreshold={0.5}
+        ListEmptyComponent={loadings.initial ? null : EmptyList}
+        ListFooterComponent={
+          loadings.loadMore ? (
+            <ActivityIndicator color={colors['accent-brand-light']} size="large" />
+          ) : null
+        }
       />
     </SafeAreaView>
   );
