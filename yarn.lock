@@ -2412,6 +2412,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/qs@npm:^6.14.0":
+  version: 6.14.0
+  resolution: "@types/qs@npm:6.14.0"
+  checksum: 10c0/5b3036df6e507483869cdb3858201b2e0b64b4793dc4974f188caa5b5732f2333ab9db45c08157975054d3b070788b35088b4bc60257ae263885016ee2131310
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:~19.1.10":
   version: 19.1.17
   resolution: "@types/react@npm:19.1.17"
@@ -6907,6 +6914,7 @@ __metadata:
     "@react-navigation/native": "npm:^7.1.28"
     "@react-navigation/native-stack": "npm:^7.11.0"
     "@react-navigation/stack": "npm:^7.6.16"
+    "@types/qs": "npm:^6.14.0"
     "@types/react": "npm:~19.1.10"
     axios: "npm:^1.13.4"
     clsx: "npm:^2.1.1"
@@ -6920,6 +6928,7 @@ __metadata:
     nativewind: "npm:latest"
     prettier: "npm:^3.2.5"
     prettier-plugin-tailwindcss: "npm:^0.5.11"
+    qs: "npm:^6.14.1"
     react: "npm:19.1.0"
     react-hook-form: "npm:^7.71.1"
     react-native: "npm:0.81.5"
@@ -7745,6 +7754,15 @@ __metadata:
   bin:
     qrcode-terminal: ./bin/qrcode-terminal.js
   checksum: 10c0/7561a649d21d7672d451ada5f2a2b393f586627cea75670c97141dc2b4b4145db547e1fddf512a3552e7fb54de530d513a736cd604c840adb908ed03c32312ad
+  languageName: node
+  linkType: hard
+
+"qs@npm:^6.14.1":
+  version: 6.14.1
+  resolution: "qs@npm:6.14.1"
+  dependencies:
+    side-channel: "npm:^1.1.0"
+  checksum: 10c0/0e3b22dc451f48ce5940cbbc7c7d9068d895074f8c969c0801ac15c1313d1859c4d738e46dc4da2f498f41a9ffd8c201bd9fb12df67799b827db94cc373d2613
   languageName: node
   linkType: hard
 
