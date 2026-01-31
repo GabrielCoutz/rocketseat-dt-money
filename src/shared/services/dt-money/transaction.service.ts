@@ -36,3 +36,4 @@ export const deleteTransaction = async (id: number) => {
 export const updateTransaction = async (transaction: UpdateTransactionInterface) => {
   await dtMoneyApi.put('/transaction', transaction);
 };
+
